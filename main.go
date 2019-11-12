@@ -73,7 +73,8 @@ func (p *CfPlugin) Deploy(cfDomains manifest.CfDomains, manifestReader manifest.
 
 	// Add route so that we can run the smoke tests
 	tempRouteDomain := newAppRoutes[0].Domain
-	tempRoute := plugin_models.GetApp_RouteSummary{Host: newAppName, Domain: tempRouteDomain}
+	tempRoutePath := newAppRoutes[0].Path
+	tempRoute := plugin_models.GetApp_RouteSummary{Host: newAppName, Domain: tempRouteDomain, Path: tempRoutePath}
 
 	// If deploy is unsuccessful, p.ErrorFunc will be called which exits.
 	p.Deployer.PushNewApp(newAppName, tempRoute, args.ManifestPath, manifestScaleParameters)
