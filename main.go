@@ -250,7 +250,13 @@ func (p *CfPlugin) listCfDomains(cfPath string) (domains []string, err error) {
 }
 
 func FQDN(r plugin_models.GetApp_RouteSummary) string {
-	return fmt.Sprintf("%v.%v", r.Host, r.Domain.Name)
+	fqdn := fmt.Sprintf("%v.%v", r.Host, r.Domain.Name)
+	
+	if len(r.Path) != 0 {
+		fqdn = fmt.Sprintf("%v/%v", fqdn, r.Path)
+	}
+
+	return fqdn
 }
 
 func main() {
